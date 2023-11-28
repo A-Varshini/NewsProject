@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import Axios from 'axios';
+import { Link } from "react-router-dom";
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +21,35 @@ export default class Login extends Component {
     .then((res)=>{
       if(res.status===200){
         console.log(res.data);
-      }else{
-        Promise.reject();
+        if(res.data.status === 'ok') {
+          alert("Login Successfull!!!");
+          window.location.href="./home"
+          console.log("lmao")
+        }
+     
+      
       }
-    })
+     
+      else{
+        
+      
+        Promise.reject();
+        
+       
+      }
+      
+      
+      
+     
+    }
+    
+    )
+    
     .catch((err)=>alert(err))
+    
+   
+   
+   
   }
   render() {
     return (
@@ -65,9 +90,10 @@ export default class Login extends Component {
         </div> */}
 
         <div className="d-grid">
-          <button type="submit" className="button">
+          {/* <Link to={`/`}> */}
+         <center> <button type="submit" className="button">
             Submit
-          </button>
+          </button></center>
         </div>
         <p className="forgot-password text-right">
           <a href="/sign-up">Sign Up</a>

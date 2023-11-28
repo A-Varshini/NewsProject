@@ -50,10 +50,12 @@ export const User = () => {
                   <BsBagCheck className='icon' />
                   <h4>My Order</h4>
                 </button> */}
+                <Link to='/wishlist'>
                 <button className='box'>
                   <AiOutlineHeart className='icon' />
                   <h4>Wishlist</h4>
                 </button>
+                </Link>
                 <button className='box'>
                   <GrHelp className='icon' />
                   <h4>Help</h4>

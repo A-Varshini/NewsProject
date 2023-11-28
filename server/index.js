@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { User } from './models/User.js';
 import { Article } from './models/Article.js';
 import cors from 'cors';
+// const bcrypt =require ("bcryptjs")
 
 const app = express();
 app.use(cors());
@@ -18,10 +19,20 @@ app.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
         console.log(req.body);
+        
+
+        const user= await User.findOne({email,password});
+        
+        if (!user){
+            return res.json({ error: "User not found"});
+        }
 
         const data = await User.find({ email: email, password: password }).exec();
      
-        return res.json(data);
+     return  res.send({ status: "ok" , data: data});
+    //   res.json(data);
+       
+       
     } catch (err) {
         return res.status(500).json({ error: err.message });
     }
@@ -29,19 +40,21 @@ app.post("/login", async (req, res) => {
 app.post("/register", async (req, res) => {
     const { fname, lname, email, password } = req.body;
   
-   
+//    const encryptedPassword= await bcrypt.hash(password,10);
   
     try {
       const oldUser = await User.findOne({ email });
   
       if (oldUser) {
         return res.send({ error: "User Exists" });
+        alert("The User Aldready Exists!, Please Use a different Email Id!!");
       }
       await User.create({
         fname,
         lname,
         email,
         password,
+        // : encryptedPassword ,
       });
       res.send({ status: "ok" });
     } catch (error) {

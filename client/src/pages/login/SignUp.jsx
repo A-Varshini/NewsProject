@@ -15,7 +15,7 @@ export default class SignUp extends Component {
     e.preventDefault();
     const { fname, lname, email, password } = this.state;
     console.log(fname, lname, email, password);
-    fetch("http://localhost:8000/register", {
+    fetch("http://localhost:4000/register", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -33,6 +33,7 @@ export default class SignUp extends Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "userRegister");
+        alert ("User Registered Successfully!!!")
       });
   }
   render() {
@@ -47,7 +48,7 @@ export default class SignUp extends Component {
             className="form-control"
             placeholder="First name"
             onChange={(e) => this.setState({ fname: e.target.value })}
-          />
+          required/>
         </div>
 
         <div className="mb-3">
@@ -57,7 +58,7 @@ export default class SignUp extends Component {
             className="form-control"
             placeholder="Last name"
             onChange={(e) => this.setState({ lname: e.target.value })}
-          />
+          required/>
         </div>
 
         <div className="mb-3">
@@ -67,7 +68,7 @@ export default class SignUp extends Component {
             className="form-control"
             placeholder="Enter email"
             onChange={(e) => this.setState({ email: e.target.value })}
-          />
+          required/>
         </div>
 
         <div className="mb-3">
@@ -77,7 +78,7 @@ export default class SignUp extends Component {
             className="form-control"
             placeholder="Enter password"
             onChange={(e) => this.setState({ password: e.target.value })}
-          />
+         required />
         </div>
 
         <div className="d-grid">
