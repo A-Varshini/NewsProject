@@ -4,6 +4,22 @@ import { User } from './models/User.js';
 import { Article } from './models/Article.js';
 import cors from 'cors';
 // const bcrypt =require ("bcryptjs")
+import multer from 'multer';
+
+
+// let storage =multer.diskStorage({
+//     destination:'/images',
+//     filename : (req, file,cb)=>{
+//         cb(null, file.originalname)
+//     }
+// })
+
+// let upload = multer({
+//     storage : storage
+// })
+
+// const multer =require ("multer");
+
 
 const app = express();
 app.use(cors());
@@ -61,7 +77,9 @@ app.post("/register", async (req, res) => {
       res.send({ status: "error" });
     }
   });
-app.post("/news", async (req, res) => {
+//   const multer  = require('multer')
+  const upload = multer({ dest: '/images/' })
+app.post("/news", upload.single('file'),async (req, res) => {
     try {
         const { title, description,file } = req.body;
         console.log(req.body);

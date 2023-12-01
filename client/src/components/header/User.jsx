@@ -60,10 +60,11 @@ export const User = () => {
                   <GrHelp className='icon' />
                   <h4>Help</h4>
                 </button>
+                <Link to='/'>
                 <button className='box'>
                   <BiLogOut className='icon' />
                   <h4>Log Out</h4>
-                </button>
+                </button></Link>
               </div>
             )}
           </>

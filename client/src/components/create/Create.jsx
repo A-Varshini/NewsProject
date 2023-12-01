@@ -9,6 +9,7 @@ import 'react-quill/dist/quill.snow.css';
 
 export const Create = () => {
   // const[postImage,setPostImage]= useState({myFile:""})
+  const [image,setImage] = useState("");
 const [content, setcontent] = useState([]);
   const [files, setFiles] = useState([]);
   const [info, setInfo] = useState({
@@ -50,6 +51,9 @@ const [content, setcontent] = useState([]);
 
   const onValueChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
+    const file= e.target.files[0];
+    console.log(file);
+    setImage(e.target.files[0]);
   };
 
   const addInfoDetails = async () => {
@@ -83,15 +87,19 @@ const [content, setcontent] = useState([]);
           <div className='img'>
             <img src='' alt='image' className='image-preview' />
           </div>
-          <form onSubmit={handleSubmit} action='/create'>
+          <form onSubmit={handleSubmit} action='/create' enctype="multipart/form-data" method="post">
             <div className='inputfile flexCenter'>
+            {image ? <img src={URL.createObjectURL(image)} alt=""/> :<img src="" width={100} height={100} alt=""/>}
               <input
                 type='file'
                 accept='image/*'
                 alt='img'
                 onChange={(e) => onValueChange(e)}
                 name='file'
+                
+                
               />
+
               <button onClick={handleImageSubmit} type='button'>
                 Upload
               </button>
@@ -110,7 +118,12 @@ const [content, setcontent] = useState([]);
               onChange={(e) => onValueChange(e)}
               name='textarea'
             ></textarea>
-            <ReactQuill value={content} theme="snow"/>
+            {/* <ReactQuill value={content} theme="snow" 
+             id=''
+              cols='30'
+              rows='10'
+              onChange={(e) => onValueChange(e)}
+              name='textarea'/> */}
 
             <button className='button' onClick={addInfoDetails}>
               Create Post

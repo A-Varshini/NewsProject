@@ -43,8 +43,11 @@ const EmailRestAPI = () => {
 
   return (
     <div>
+        <br></br>
         <center><h1>Contact Me!</h1></center>
       <form onSubmit={handleSubmit} className='emailForm'>
+      
+      
         <input
           type="text"
           placeholder="Your Name"
@@ -60,6 +63,7 @@ const EmailRestAPI = () => {
         <textarea
           cols="30"
           rows="10"
+          // placeholder="Please enter your query heree..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         >

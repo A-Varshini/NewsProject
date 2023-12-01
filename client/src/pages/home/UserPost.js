@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import './userpost.css'
 import { Link } from "react-router-dom"
-import { AiOutlineTags, AiOutlineClockCircle, AiOutlineComment, AiOutlineShareAlt } from "react-icons/ai"
+import { AiOutlineTags, AiOutlineClockCircle, AiOutlineComment, AiOutlineShareAlt,AiFillHeart,AiOutlineHeart} from "react-icons/ai"
+import { FaHeart, FaThumbsUp } from 'react-icons/fa';
 
 export function UserPost() {
   const [arr, setArr] = useState([]);
@@ -22,11 +23,18 @@ export function UserPost() {
       .catch((err) => alert(err));
   }, []); // Added an empty dependency array to make the effect run only once
 
-  // const [isRed, setIsRed] = useState(false);
+  // const [isRed, setIsRed] = useState(true);
 
   // const handleHeartClick = () => {
-  //   setIsRed(!isRed);
+    // setIsRed(!isRed);
   // };
+  const [isLiked, setIsLiked] = useState(false);
+  const icon = isLiked ? <AiOutlineHeart color="#ddd" /> : <AiFillHeart color="inherit" />;
+
+  const handleClick = () => {
+    setIsLiked(!isLiked);
+  };
+ 
   return (
     <section className='blog'>
     <div className='container grid3'>
@@ -38,7 +46,12 @@ export function UserPost() {
             
           <Link to={`/details/edit/${value._id}`} className='link'>
           <div className='img'>
-          <img src={value.file} alt='cover' className="category" /></div>
+          <img  alt='cover' className="category"
+          src={
+            value.urlToImage == null
+              ? "https://i.insider.com/6492daec65b9ce0018a443c8?width=1200&format=jpeg"
+              : value.urlToImage
+          } /></div>
           <div className='tag'>
                   <AiOutlineTags className='icon' />
                   <a href='/'>#Go Apptiv</a>
@@ -55,11 +68,30 @@ export function UserPost() {
                   <AiOutlineComment className='icon' /> <label htmlFor=''>27</label>
                   <a  href="https://www.addtoany.com/share_save?linkurl=http%3A%2F%2Fcodepen.io%2Fsunnysingh%2Fpen%2FOPxbgq"> <AiOutlineShareAlt className='icon'  href="https://www.addtoany.com/share_save?linkurl=http%3A%2F%2Fcodepen.io%2Fsunnysingh%2Fpen%2FOPxbgq"  /></a><label htmlFor='' >SHARE</label>
                 </div>
+                
             </div>
             </Link>
+            {/* <div className="heart-toggle" onClick={handleClick} >
+      {icon}
+    </div>  */}
             {/* <div className={`heart ${isRed ? 'red' : ''}`} onClick={handleHeartClick}>
       <i className="fas fa-heart"></i>
     </div> */}
+    
+    {/* <button
+						variant="unstyled"
+						fontSize={{ base: 18, md: 24 }}
+						minW={6}
+						color="accent.main"
+            // onClick={handleClick}
+						>
+						{icon?.favorites?.includes(value?._id) ? (
+							<AiFillHeart color="inherit" />
+						) : (
+							<AiOutlineHeart color="#ddd" />
+						)}
+					</button> */}
+         
           </div>
         </div>
       ))}

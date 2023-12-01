@@ -47,6 +47,7 @@ const App = () => {
           <Route exact path='/Sports' component={Sports} />
           <Route exact path='/Politics' component={Politics} />
         </Switch>
+        <br></br>
         <Footer />
       </Router>
     </>
